@@ -1,0 +1,15 @@
+sudo: required
+services:
+- docker
+install:
+- docker login --username=$DOCKER_USER --password=$DOCKER_PASS
+script:
+- docker build -t $DOCKER_IMAGE_NAME .
+- if [ ! -z "$TRAVIS_TAG" ]; then docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:$TRAVIS_TAG;
+  fi && docker push $DOCKER_IMAGE_NAME
+env:
+  matrix:
+  - DOCKER_IMAGE_NAME=fstyle/ubuntu-opencv
+  global:
+  - secure: J5BElPqOM7/cnI3SgsXVA4Pb4zLZwj1JAm5mcvvQy6DB+oURMR9vJ/1RHOo2s+Ohb5ckgVKXRVuS947w8aWnmnT5mLT3IhX8QJ+GbHKnONcIq/FUIcqJKHZm/6xD1n1meKrz+uloxZoQjIGa/w/udvqOesxBrCcKJOwxjQAx7I5rKU/bLn/Qtus9FUcP6f3UblZJLT4ehXZOLYz3N2j4V4LHROdJdSSzOnT28CbK4C+f0vs9Ey/3m6TNoUt7+LxrpbfWFeR++1U6tR+XQciECxvowsAZkfPhiNpYdpH2GCVGpm0u97bCOP49XyxlxaowNO+9+BiEf2bB+HJgDEpYhPsDTyTmK+AUN8k0eVc7C3DWmXJ0zptpBrde1l6+ob24pnjLmHFNBO15GpxKrcOQ32V1QEN8r41HG+8T8hxgJLcKh1C/9Sert0Hw02lVJzxdwhbwO8AroLgiBO5GT0EkQiFzaGFpDGAKcltqYJMzkJFX6LyZ0jqfqyOmptqAFhEltEmnV9UCLvDPRT39//6A4imwchS/VH8Kp1c/lTBPGZisV4Ui6BnvaraLc6gxfCY3yeLxo+HEgVnK5AuMjl8riX5hrq3sunC5dFDksDZb5uoEQ31HO5wRVtaoRht7w5DPyOruQEjUewtHAbphD+lKZSKEOc2J/IVpYPDtNmTrtwg=
+  - secure: pJE1h3//ypKoqkiaq7INuQ00VIxy9PUQZJaD6I3YNd0v/lRFzgcQU6ZIlwb8agFhgFt9ySmdVYX/FXLK6iCqB6exeA1H+BfWn25ocTE6ku98nB/9RxfYtKTxdwe+2WXlsrYieDZNKENtng2RjwsmlIzjFmvWfBWQtYzdU4cEDIN+jSnMzsxvweJl+fu93+9hfcK2uObrG9mctmAeVlax58YWCdYp4Z2DgLfwJRIc2TF0akoWwc3bk21LhMYfQ7GttbeqRJojHCry/5VzG3Ft/jTlkiEx91OZR6WgtXNkLo972WmVIUGPIunnid/3ypmyDxgrHUnB8nisMfqFUMOnTlPDU6rc0JFOtiawSrnxqmopSWvuUtjU+oadTwkaZl8R8vATAce5v/cY89McP+vmTPT3hv/bp3CXwu0hTSrgbLI7NGPzxTQ/ouCh4sX6P9pSobWrh3dsFtIP8iYnTJRRZN2AfUcoDxAW9RcRKdpg8/E6CnDBB76qC0xuT80VdsDDBqikXIMsH8pMNQ4nyS6Yj0UZtqeHbmc7AS+i2rXOZ+yYKC8FmSuKCsVzcDqoFuLErLQ/FbBzUxFEB0nMWs7m44tXjy/BQyHIh8Whk6Fs/vr5vzHsdE2gGEeLfw2LLMkzaY9OxUPnCQuu0m/dtCQivemgMMRWO0pZSS9BYzyY6Iw=
