@@ -26,6 +26,7 @@ RUN apt-get update && \
       unzip ${OPENCV_VERSION}.zip && \
       rm -rf ${OPENCV_VERSION}.zip && \
 
+      # download and extract opencv-contrib
       wget https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip && \
       unzip ${OPENCV_VERSION}.zip && \
       rm -rf ${OPENCV_VERSION}.zip && \
@@ -58,7 +59,11 @@ RUN apt-get update && \
         -D BUILD_opencv_python3=OFF \
         -D BUILD_opencv_apps=OFF \
         -D BUILD_opencv_dnn=ON \
+
         -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib-${OPENCV_VERSION}/modules \
+        -D BUILD_opencv_plot=ON \        
+        -D BUILD_opencv_tracking=ON \
+        
         -D BUILD_opencv_aruco=OFF \
         -D BUILD_opencv_bgsegm=OFF \
         -D BUILD_opencv_bioinspired=OFF \
@@ -76,7 +81,6 @@ RUN apt-get update && \
         -D BUILD_opencv_matlab=OFF \
         -D BUILD_opencv_optflow=OFF \
         -D BUILD_opencv_ovis=OFF \
-        -D BUILD_opencv_plot=OFF \
         -D BUILD_opencv_reg=OFF \
         -D BUILD_opencv_rgbd=OFF \
         -D BUILD_opencv_saliency=OFF \
@@ -85,7 +89,6 @@ RUN apt-get update && \
         -D BUILD_opencv_structured_light=OFF \
         -D BUILD_opencv_surface_matching=OFF \
         -D BUILD_opencv_text=OFF \
-        -D BUILD_opencv_tracking=ON \
         -D BUILD_opencv_xfeatures2d=OFF \
         -D BUILD_opencv_ximgproc=OFF \
         -D BUILD_opencv_xobjdetect=OFF \
