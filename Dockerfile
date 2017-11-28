@@ -1,6 +1,7 @@
 FROM ubuntu:16.04
 
 ARG OPENCV_VERSION=3.3.1
+ARG OPENCV_BUILD_TYPE=RelWithDebInfo
 
 RUN apt-get update && \
     apt-get install -y \
@@ -15,6 +16,7 @@ RUN apt-get update && \
       libjasper-dev \
       libpng12-dev \
       libgtk-3-dev \
+      libcanberra-gtk3-module \
       # webcam
       libv4l-dev \
       libatlas-base-dev \
@@ -35,7 +37,7 @@ RUN apt-get update && \
       mkdir -p /opt/opencv-${OPENCV_VERSION}/build && \
       cd /opt/opencv-${OPENCV_VERSION}/build && \
       cmake \
-        -D CMAKE_BUILD_TYPE=RELEASE \
+        -D CMAKE_BUILD_TYPE=${OPENCV_BUILD_TYPE} \
         -D CMAKE_INSTALL_PREFIX=/usr/local \
         -D ENABLE_PRECOMPILED_HEADERS=OFF \
         -D BUILD_SHARED_LIBS=OFF \
