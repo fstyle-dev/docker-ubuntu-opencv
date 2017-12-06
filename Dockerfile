@@ -15,8 +15,6 @@ RUN apt-get update && \
       libtiff5-dev \
       libjasper-dev \
       libpng12-dev \
-      libgtk-3-dev \
-      libcanberra-gtk3-module \
       qt5-default \
       # webcam
       libv4l-dev \
@@ -45,6 +43,7 @@ RUN apt-get update && \
         -D WITH_FFMPEG=OFF \
         -D WITH_1394=OFF \
         -D WITH_IPP=OFF \
+        -D WITH_QT=ON \
         -D WITH_OPENEXR=OFF \
         -D WITH_TBB=YES \
         -D WITH_WEBP=OFF \
